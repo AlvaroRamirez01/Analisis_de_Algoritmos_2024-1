@@ -50,6 +50,76 @@ Elegir *dos* de los problemas anteriores, α o β o γ y ...
 + Calcular el tiempo de ejecución del algoritmo dado.
 
 #solucion(color:blue)[
+
+*Problema $alpha$*
+
++ Proporcionar un algoritmo recursivo (código) que solucione el problema, indicando PreCondiciones y PostCondiciones
+
+*Precondicion:* El arreglo no debe ser null y debe tener al menos un elemento.
+
+```haskell
+productoElementos :: [Int] -> Int
+productoElementos [x] = x
+productoElementos (x:xs) = x * productoElementos xs
+```
+
+*Postcondicion:* El resultado es el producto de todos los elementos del arreglo, el arreglo sigue siendo no null.
+
++ Demostrar que el algoritmo propuesto es correcto usando inducción matemática.
+
+*Demostración:*
+
+*Por Demostrar:* La función productoElementos devuelve el producto de todos los elementos de la lista $x\s$ para cualquier lista no vacía $x\s$.
+
+*Caso base:* Cuando $x\s$ es una lista con un solo elemento.
+
+En este caso, al ser un único elemento, por vacuidad se cumple que el producto de todos los elementos de la lista es el elemento mismo, entonces se regresa el elemento.
+
+*Hipótesis de inducción:* Supongamos que la función productoElementos devuelve el producto de todos los elementos de la lista $x\s$ de longitud k.
+
+*Paso inductivo:* Ahora demostraremos que la función productoElementos devuelve el producto de todos los elementos de la lista $y\s$ de longitud k+1.
+
+La función productoElementos ys podemos verla como una función que tiene un arreglo de tamaño $k+1$ y se representa de la siguiente forma $[y_1, y_2, y_3, ...,y_k,y_(k+1)]$, asi mismo, podemos expresarla de la siguiente forma $[y_1, y_2, y_3, ...,y_k] ++ [y_(k+1)]$.
+
+Una vez expresada de esta forma, podemos ver que la función productoElementos $[y_1, y_2, y_3, ...,y_k]$ es equivalente a la función productoElementos $x\s$ de longitud k, por lo que podemos aplicar la hipótesis de inducción y sabemos que la función productoElementos $[y_1, y_2, y_3, ...,y_k]$ devuelve el producto de todos los elementos de la lista $y\s$ de longitud k.
+
+Nos queda el otro extremo donde esta el elemento $y_(k+1)$, cuando se le pasa como argumento a la funcion _productoElementos [$y_(k+1)$]_ podemos ver que se le esta pasando un unico elemento, entonces caen en nuestro caso base y esto nos devuelve el mismo elemento.
+
+Entonces podemos multiplicar los resultados generados por las funciones _productoElementos [$y_(k+1)$]_ y _productoElementos [$y_1, y_2, y_3, ...,y_k]$_ y obtenemos el producto de todos los elementos de la lista $y\s$ de longitud k+1, los cuales se expresarian de la siguiente forma. 
+
+#align(center)[
+  productoElementos $y\s = (y_1 * y_2 * ... * y_k) * y_(k+1)$
+]
+
+Por lo tanto, hemos demostrado por inducción matemática que el código es correcto, ya que cumple con la hipótesis inductiva para todas las listas no vacías.
+
++ Calcular el tiempo de ejecución del algoritmo dado.
+
+El tiempo de ejecución del código que calcula el producto de todos los elementos de una lista utilizando recursion depende de la longitud de la lista. En este caso, la función _productoElementos_ se implementa de manera recursiva, y la cantidad de operaciones realizadas es directamente proporcional al tamaño de la lista. Cada llamada recursiva reduce la longitud de la lista en 1.
+
+Por lo tanto, si tienes una lista de longitud $n$, la función realizará $n - 1$ llamadas recursivas. Cada llamada implica una multiplicación y una operación de acceso a la lista, lo que significa que en total se realizarán aproximadamente $2 * (n - 1)$ operaciones aritméticas y de acceso a la lista.
+
+Entonces, la complejidad de tiempo para este código es $O(n)$, donde $n$ es la longitud de la lista. Esto significa que el tiempo de ejecución aumenta linealmente con el tamaño de la lista.
+
+*Problema $beta$*
+
++ Proporcionar un algoritmo recursivo (código) que solucione el problema, indicando PreCondiciones y PostCondiciones
+
+```haskell
+sumaPrimerosN :: Int -> Int
+sumaPrimerosN 0 = 0
+sumaPrimerosN n
+    | mod n 3 == 0 = n + sumaPrimerosN (n - 1)
+    | otherwise = sumaPrimerosN (n - 1)
+```
+
++ Demostrar que el algoritmo propuesto es correcto usando inducción matemática.
+
++ Calcular el tiempo de ejecución del algoritmo dado.
+
+
+
+
 ]
 
 
@@ -76,28 +146,28 @@ Dados los códigos para los problemas de A y B, mostrados abajo, demostrar usand
     end Horner
 `
 
-// #algorithm({
-//   import algorithmic: *
-//   Function("Binary-Search", args: ("A", "n", "v"), {
-//     Cmt[Initialize the search range]
-//     Assign[$l$][$1$]
-//     Assign[$r$][$n$]
-//     State[]
-//     While(cond: $l <= r$, {
-//       Assign([mid], FnI[floor][$(l + r)/2$])
-//       If(cond: $A ["mid"] < v$, {
-//         Assign[$l$][$m + 1$]
-//       })
-//       ElsIf(cond: [$A ["mid"] > v$], {
-//         Assign[$r$][$m - 1$]
-//       })
-//       Else({
-//         Return[$m$]
-//       })
-//     })
-//     Return[*null*]
-//   })
-// })
+#algorithm({
+  import algorithmic: *
+  Function("Binary-Search", args: ("A", "n", "v"), {
+    Cmt[Initialize the search range]
+    Assign[$l$][$1$]
+    Assign[$r$][$n$]
+    State[]
+    While(cond: $l <= r$, {
+      Assign([mid], FnI[floor][$(l + r)/2$])
+      If(cond: $A ["mid"] < v$, {
+        Assign[$l$][$m + 1$]
+      })
+      ElsIf(cond: [$A ["mid"] > v$], {
+        Assign[$r$][$m - 1$]
+      })
+      Else({
+        Return[$m$]
+      })
+    })
+    Return[*null*]
+  })
+})
 
 `
     BinarySearch(var A:Atype; a,b:integer;
