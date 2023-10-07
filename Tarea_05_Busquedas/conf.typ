@@ -168,6 +168,34 @@
   ]
 }
 
+#let pseudo(lang: "typ", it) = {
+  // change this regex for custom delimiters, current one is double $
+  let matches = it.text.matches((regex("\$\$.*\$\$")))
+  let last-end = 0
+  for match in matches {
+    raw(lang: lang, it.text.slice(last-end, match.start))
+    // set font
+    show text: t => {
+      set math.text(font: "New Computer Modern Math")
+      t
+    }
+    eval("$" + match.text.slice(3, -3) + "$")
+    last-end = match.end
+  }
+  raw(lang: lang, it.text.slice(last-end,))
+}
+
+#show raw: it => {
+  if it.lang.contains("pseudo-") {
+    let lang = it.lang.slice("pseudo-".len(),)
+    // sets text size to be the same as raw blocks
+    set text(size: 1.25em)
+    pseudo(lang: lang, it)
+  } else {
+    it
+  }
+}
+
 // Display inline code in a small box
 // that retains the correct baseline.
 #show raw.where(block: false): box.with(
