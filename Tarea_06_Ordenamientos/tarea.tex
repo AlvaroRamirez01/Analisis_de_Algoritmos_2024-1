@@ -1,0 +1,52 @@
+\documentclass{article}
+\title{Análisis de Algoritmos\\Tarea: Ordenamientos}
+\author{Profra: Luz Gasca Soto\\Ayudantes: Teresa Becerril & Rodrigo F. Velázquez}
+\date{13 de Octubre de 2023}
+
+\begin{document}
+\maketitle
+
+\section{El Problema de Selección}
+
+El Problema de Selección consiste en encontrar el $k$-ésimo elemento más pequeño de un conjunto de $n$ datos, $k \leq n$.
+
+Considere los algoritmos de ordenamiento:
+\begin{enumerate}
+\item Merge Sort
+\item Selection Sort
+\item Quick Sort
+\item Heap Sort
+\item Insertion Sort
+\item Shell Sort
+\item Local Insertion Sort
+\end{enumerate}
+
+Pregunta: ¿Cuáles de las estrategias usadas por los algoritmos anteriores, nos ayudan a resolver el Problema de Selección, sin tener que ordenar toda la secuencia? Suponga $k$ tal que $1 < k < n$.
+
+Justifique, para cada inciso, sus respuestas.
+
+\section{Problema de Selección usando Partition}
+Resolver el Problema de Selección usando el proceso Partition. Además indique el desempeño computacional de la estrategia.
+
+\section{Ejercicios}
+Desarrollar uno de los siguientes ejercicios:
+\begin{enumerate}
+\item[(A)] Desarrollar un algoritmo que genere listas de datos que resulten ser el peor caso para el Shell Sort para las secuencias de Shell y para las secuencias de Hibbart.
+
+\item[(B)] Desarrolle un algoritmo que genere listas de datos que resulten ser el peor caso para el Quick Sort cuando el pivote es $S[n$ \verb|div| $2]$
+\end{enumerate}
+
+\textbf{O. Problema} $\Phi$: Suponga que tiene $n$ intervalos cerrados sobre la línea real: $[a(i), b(i)]$, con $1 \leq i \leq n$. Encontrar la máxima $k$ tal que existe un punto $x$ que es cubierto por los $k$ intervalos.
+\begin{enumerate}
+\item Proporcione un algoritmo que solucione el problema $\Phi$.
+\item Justifique que su propuesta de algoritmo es correcta.
+\item Calcule, con detalle, la complejidad computacional de su propuesta
+\item Proporcione un pseudo-código del algoritmo propuesto.
+\end{enumerate}
+
+\section{Fecha de Entrega y Examen}
+Martes 23 de Octubre del 2023
+
+¡Suerte!
+
+\end{document}
