@@ -1,0 +1,124 @@
+\documentclass[answers]{exam}
+
+\usepackage[spanish]{babel}
+\usepackage[shortlabels]{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{wrapfig}
+\usepackage{xcolor, color}
+
+\newcommand{\materia}{Analisis de Algoritmos 2024-1}
+\newcommand{\tarea}{Tarea 06: Ordenamientos}
+\newcommand{\fecha}{\today}
+\newcommand{\profesor}{Profesor(a): María de Luz Gasca Soto}
+\newcommand{\ayudantes}{
+  Rodrigo Fernando Velázquez Cruz \\
+  Teresa Becerril Torres
+}
+\newcommand{\alumnos}{
+  Alvaro Ramirez Lopez \textbf{N° cuenta:} 316276355
+}
+
+\decimalpoint{}
+\graphicspath{{Imagenes}}
+\colorsolutionboxes
+\shadedsolutions
+
+% \definecolor{SolutionBoxColor}{rgb}{0,128,255}
+% \definecolor{SolutionColor}{rgb}{0,204,255}
+\definecolor{SolutionColor}{rgb}{0,128,255}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\extrawidth{1.56cm}
+\extraheadheight[1.5in]{-0.25in}
+\extrafootheight[-0.175in]{-0.375in}
+\firstpageheader{
+}{
+  \begin{minipage}[c]{3.5cm}
+    \includegraphics[width=3.5cm]{fc.png}
+  \end{minipage}
+  \begin{minipage}[c]{11.0cm}
+    {\bfseries\huge\materia{} \\[2mm]
+      \LARGE \tarea{} \\
+      \large Profesor:} \profesor{} \\
+    \hspace{0.1cm}
+    {\bfseries\large Ayudantes:}
+    \begin{minipage}[t]{8.5cm}
+      \ayudantes{}
+    \end{minipage}\hfill\break{}
+    {\bfseries\small Alumnos:}
+    \begin{minipage}[t]{8.5cm}
+      \alumnos{}
+    \end{minipage}\hfill\break{}
+  \end{minipage}
+  \begin{minipage}[c]{3.25cm}
+    \includegraphics[width=3.25cm]{unam.png}
+  \end{minipage}
+}{}
+\runningheader{\materia}{\tarea}{\fecha}
+\runningheadrule{}
+\footer{}{Página \thepage\ de \numpages}{}
+\footrule{}
+\renewcommand{\solutiontitle}{\noindent\textbf{Solución:}\par\noindent}
+
+
+
+\begin{document}
+\begin{questions}
+
+  \question{El Problema de Selección consiste en encontrar el $k$-ésimo elemento más pequeño de un conjunto de $n$ datos, $k \leq n$.
+
+  Considere los algoritmos de ordenamiento:
+  \begin{enumerate}[(a)]
+  \item Merge Sort
+  \item Selection Sort
+  \item Quick Sort
+  \item Heap Sort
+  \item Insertion Sort
+  \item Shell Sort
+  \item Local Insertion Sort
+  \end{enumerate}
+  
+  Pregunta: ¿Cuáles de las estrategias usadas por los algoritmos anteriores, nos ayudan a resolver el Problema de Selección, sin tener que ordenar toda la secuencia? Suponga $k$ tal que $1 < k < n$.
+  
+  Justifique, para cada inciso, sus respuestas.
+  }
+  \begin{solution}
+    Aquí va la solución
+  \end{solution}
+  \question{Resolver el Problema de Selección usando el proceso Partition. Además indique el desempeño computacional de la estrategia.}
+  \begin{solution}
+    Aquí va la solución.
+  \end{solution}
+  \question{Desarrollar uno de los siguientes ejercicios:
+    \begin{enumerate}
+      \item[(A)] Desarrollar un algoritmo que genere listas de datos que resulten ser el peor caso para el Shell Sort para las secuencias de Shell y para las secuencias de Hibbart.
+      \item[(B)] Desarrolle un algoritmo que genere listas de datos que resulten ser el peor caso para el Quick Sort cuando el pivote es $S[n$ \verb|div| $2]$
+    \end{enumerate}}
+  \begin{solution}
+    Aquí va la solución.
+  \end{solution}
+  \question{\textbf{Problema Opcional} $\Phi$: Suponga que tiene $n$ intervalos cerrados sobre la línea real: $[a(i), b(i)]$, con $1 \leq i \leq n$. Encontrar la máxima $k$ tal que existe un punto $x$ que es cubierto por los $k$ intervalos.
+  \begin{enumerate}
+  \item Proporcione un algoritmo que solucione el problema $\Phi$.
+  \item Justifique que su propuesta de algoritmo es correcta.
+  \item Calcule, con detalle, la complejidad computacional de su propuesta
+  \item Proporcione un pseudo-código del algoritmo propuesto.
+  \end{enumerate}}
+  \begin{solution}
+    Aquí va la solución.
+  \end{solution}
+
+  \begin{solutionbox}{2in}
+    Once upon a midnight dreary, while I pondered, weak and weary, Over
+    many a quaint and curious volume of forgotten lore--- While I
+    nodded, nearly napping, suddenly there came a tapping, As of some
+    one gently rapping, rapping at my chamber door. ‘‘\,’Tis some
+    visitor,’’ I muttered, ‘‘tapping at my chamber door--- Only this and
+    nothing more.’’
+    \end{solutionbox}
+\end{questions}
+\end{document}
+
