@@ -1,12 +1,14 @@
-\documentclass[answers]{exam}
+\documentclass[answers, 10pt]{exam}
 
 \usepackage[spanish]{babel}
 \usepackage[shortlabels]{enumitem}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\usepackage[cache=false,outputdir=./build]{minted}
 \usepackage{lmodern}
 \usepackage{wrapfig}
 \usepackage{xcolor, color}
+\definecolor{LightGray}{gray}{0.9}
 
 \newcommand{\materia}{Analisis de Algoritmos 2024-1}
 \newcommand{\tarea}{Tarea 06: Ordenamientos}
@@ -22,7 +24,7 @@
 
 \decimalpoint{}
 \graphicspath{{Imagenes}}
-\colorsolutionboxes
+% \colorsolutionboxes
 \shadedsolutions
 
 % \definecolor{SolutionBoxColor}{rgb}{0,128,255}
@@ -46,11 +48,11 @@
     \hspace{0.1cm}
     {\bfseries\large Ayudantes:}
     \begin{minipage}[t]{8.5cm}
-      \ayudantes{}
+      \ayudantes{}\vspace{0.1cm}
     \end{minipage}\hfill\break{}
-    {\bfseries\small Alumnos:}
+    {\bfseries\large Alumno:}
     \begin{minipage}[t]{8.5cm}
-      \alumnos{}
+      \alumnos{}\\
     \end{minipage}\hfill\break{}
   \end{minipage}
   \begin{minipage}[c]{3.25cm}
@@ -70,23 +72,57 @@
 
   \question{El Problema de Selección consiste en encontrar el $k$-ésimo elemento más pequeño de un conjunto de $n$ datos, $k \leq n$.
 
-  Considere los algoritmos de ordenamiento:
-  \begin{enumerate}[(a)]
-  \item Merge Sort
-  \item Selection Sort
-  \item Quick Sort
-  \item Heap Sort
-  \item Insertion Sort
-  \item Shell Sort
-  \item Local Insertion Sort
-  \end{enumerate}
-  
-  Pregunta: ¿Cuáles de las estrategias usadas por los algoritmos anteriores, nos ayudan a resolver el Problema de Selección, sin tener que ordenar toda la secuencia? Suponga $k$ tal que $1 < k < n$.
-  
-  Justifique, para cada inciso, sus respuestas.
+    Considere los algoritmos de ordenamiento:
+    \begin{enumerate}[(a)]
+      \item Merge Sort
+      \item Selection Sort
+      \item Quick Sort
+      \item Heap Sort
+      \item Insertion Sort
+      \item Shell Sort
+      \item Local Insertion Sort
+    \end{enumerate}
+
+    Pregunta: ¿Cuáles de las estrategias usadas por los algoritmos anteriores, nos ayudan a resolver el Problema de Selección, sin tener que ordenar toda la secuencia? Suponga $k$ tal que $1 < k < n$.
+
+    Justifique, para cada inciso, sus respuestas.
   }
   \begin{solution}
-    Aquí va la solución
+    \begin{enumerate}
+      \item \textbf{Merge Sort:} Este algoritmo puede modificarse para resolver el
+            Problema de Selección. En lugar de hacer merge completo de las sublistas,
+            podemos detener el proceso cuando queden k elementos sin mezclar en
+            el conjunto grande, es decir que haremos recursion hasta el nivel k donde
+            el tamaño de los subconjuntos sea 1 o 2, y luego haremos un merge pero solo
+            con los elementos menores de esos subconjuntos, es decir que nos quedaria un subconjunto
+            de $n \verb| div | 2$ elementos, ahi las comparaciones serian a lo mas $log (n)$.
+
+      \item \textbf{Selection Sort:} No ayuda a resolver el Problema de Selección sin
+            ordenar toda la secuencia, ya que se basa en intercambiar el elemento
+            mínimo sucesivamente hasta ponerlo en la posición correcta.
+
+      \item \textbf{Quick Sort:} Al igual que Merge Sort, puede modificarse para
+            resolver el Problema de Selección. Podemos detener el proceso cuando el
+            pivote ocupe la posición k, retornando ese elemento. Es decir que solo
+            haremos uso de un lado de la particion, asi descartamos los elementos mayores
+            al pivote y seguimos haciendo recursion hasta que el tamaño del subconjunto sea 1 o 2.
+
+      \item \textbf{Heap Sort:} Puede usarse el heap mínimo (min heap) para
+            extraer los k elementos más pequeños en orden en O(k log n) tiempo. Esto
+            resuelve el Problema de Selección sin ordenar toda la secuencia.
+
+      \item \textbf{Insertion Sort:} No ayuda a resolver el Problema de Selección
+            sin ordenar toda la secuencia, ya que ordena insertando elementos uno a uno
+            en posiciones anteriores.
+
+      \item \textbf{Shell Sort:} Tampoco ayuda sin ordenar toda la secuencia, ya
+            que es una variante de Insertion Sort.
+
+      \item \textbf{Local Insertion Sort:} Al igual que Insertion Sort, debe
+            ordenar toda la secuencia, ademas que la referencia que se guarda sobre el
+            ultimo elemento insertado no nos asegura que sea el elemento k-esimo mas
+            pequeño.
+    \end{enumerate}
   \end{solution}
   \question{Resolver el Problema de Selección usando el proceso Partition. Además indique el desempeño computacional de la estrategia.}
   \begin{solution}
@@ -94,31 +130,210 @@
   \end{solution}
   \question{Desarrollar uno de los siguientes ejercicios:
     \begin{enumerate}
-      \item[(A)] Desarrollar un algoritmo que genere listas de datos que resulten ser el peor caso para el Shell Sort para las secuencias de Shell y para las secuencias de Hibbart.
-      \item[(B)] Desarrolle un algoritmo que genere listas de datos que resulten ser el peor caso para el Quick Sort cuando el pivote es $S[n$ \verb|div| $2]$
+      \item[(A)] Desarrollar un algoritmo que genere listas de datos que resulten
+        ser el peor caso para el Shell Sort para las secuencias de Shell y para las
+        secuencias de Hibbart.
+      \item[(B)] Desarrolle un algoritmo que genere listas de datos que resulten
+        ser el peor caso para el Quick Sort cuando el pivote es $S[n$ \verb|div| $2]$
     \end{enumerate}}
   \begin{solution}
-    Aquí va la solución.
+    \begin{enumerate}[(A)]
+      \item \textbf{Desarrollo del algoritmo que genera el peor caso para el Shell Sort para las secuencias de Shell}
+
+            Para generar el peor caso para las secuencias de Shell debemos diseñar una
+            lista de datos en orden inverso de modo que shell sort tenga que hacer
+            muchas comparaciones e intercambios en cada paso. A continuación se muestra
+            el algoritmo que genera el peor caso para el Shell Sort para las secuencias
+            de Shell.
+
+            \begin{minted}[
+       frame=lines,
+       framesep=2mm,
+       baselinestretch=1.2,
+       bgcolor=LightGray,
+       fontsize=\footnotesize,
+       linenos
+       ]{Python}
+   import sys
+   
+   def worst_case_shell_sort_shell(seq):
+     n = len(seq)
+     h = 1
+     while h < n // 3:
+       h = 3 * h + 1
+    
+     worst_case_list = list(range(n, 0, -1))
+     return worst_case_list
+    
+   # Ejemplo de uso
+   n = int(sys.argv[1])
+   worst_case_list = worst_case_shell_sort_shell(list(range(1, n + 1)))
+   print("Peor caso para Shell Sort con secuencias de Shell (n = {}):".format(n))
+   print(worst_case_list)
+ \end{minted}
+
+            \textbf{Desarrollo del algoritmo que genera el peor caso para Shell Sort para las secuencias de Hibbart}
+
+            Para generar el peor caso para las secuencias de Hibbart debemos diseñar una
+            lista de datos que sea la concatenación de varias secuencias ordenadas de manera inversa.
+
+            \begin{minted}[frame=lines,
+       framesep=2mm,
+       baselinestretch=1.2,
+       bgcolor=LightGray,
+       fontsize=\footnotesize,
+       linenos
+       ]{Python}
+   import sys
+
+   def worst_case_shell_sort_hibbard(seq):
+     n = len(seq)
+     gaps = [2**k - 1 for k in range(int(math.log2(n)) + 1)]
+     worst_case_list = []
+
+   for gap in gaps:
+       sublist = list(range(n, 0, -1))[:gap]
+       worst_case_list += sublist
+
+   return worst_case_list
+
+   # Ejemplo de uso
+   n = int(sys.argv[1])
+   worst_case_list = worst_case_shell_sort_hibbard(list(range(1, n + 1)))
+   print("Peor caso para Shell Sort con secuencias de Hibbard (n = {}):".format(n))
+   print(worst_case_list)
+     \end{minted}
+
+      \item \textbf{Desarrollo del algoritmo que genera el peor caso para el Quick Sort}
+
+            Para generar el peor caso para el algoritmo de Quick Sort cuando el pivote
+            se elige como el elemento en la posición S[n div 2], debemos diseñar una
+            lista de datos que esté ordenada de manera descendente o ascendente, el siguiente
+            algoritmo crea una lista ordenada de manera descendente y luego intercambia
+            el elemento en la posición n div 2 (la mitad de la lista) con el primer
+            elemento. Esto garantiza que el pivote siempre divida la lista en dos
+            sublistas desiguales, lo que resulta en el peor caso de rendimiento para
+            Quick Sort con el pivote en S[n div 2].
+
+            \begin{minted}[
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        bgcolor=LightGray,
+        fontsize=\footnotesize,
+        linenos
+        ]{Python}
+  import sys
+
+  def worst_case_quick_sort(n):
+    if n <= 0:
+      return []
+
+    # Crear una lista ordenada de manera descendente
+    worst_case_list = list(range(n, 0, -1))
+    
+    # Intercambiar el elemento en la posición n div 2 con el primer elemento
+    worst_case_list[0], worst_case_list[n // 2] = worst_case_list[n // 2], worst_case_list[0]
+    
+    return worst_case_list
+
+  # Ejemplo de uso
+  n = int(sys.argv[1])
+  worst_case_list = worst_case_quick_sort(n)
+  print("Peor caso para Quick Sort (n = {}):".format(n))
+  print(worst_case_list)
+
+      \end{minted}
+    \end{enumerate}
+
   \end{solution}
   \question{\textbf{Problema Opcional} $\Phi$: Suponga que tiene $n$ intervalos cerrados sobre la línea real: $[a(i), b(i)]$, con $1 \leq i \leq n$. Encontrar la máxima $k$ tal que existe un punto $x$ que es cubierto por los $k$ intervalos.
-  \begin{enumerate}
-  \item Proporcione un algoritmo que solucione el problema $\Phi$.
-  \item Justifique que su propuesta de algoritmo es correcta.
-  \item Calcule, con detalle, la complejidad computacional de su propuesta
-  \item Proporcione un pseudo-código del algoritmo propuesto.
-  \end{enumerate}}
-  \begin{solution}
-    Aquí va la solución.
-  \end{solution}
+    \begin{enumerate}[(a)]
+      \item Proporcione un algoritmo que solucione el problema $\Phi$.
+      \item Justifique que su propuesta de algoritmo es correcta.
+      \item Calcule, con detalle, la complejidad computacional de su propuesta.
+      \item Proporcione un pseudo-código del algoritmo propuesto.
+    \end{enumerate}}
+  % \begin{solution}
+  % 	\begin{enumerate}[(a)]
+  % 		\item \textbf{Proporcione un algoritmo que solucione el problema $\Phi$.}
+  % 		      \begin{enumerate}[1.]
+  % 			      \item Combine los extremos de los intervalos en un único conjunto 
+  %             de puntos, junto con una etiqueta que indique si el punto es un 
+  %             extremo izquierdo (L) o derecho (R) del intervalo.
 
-  \begin{solutionbox}{2in}
-    Once upon a midnight dreary, while I pondered, weak and weary, Over
-    many a quaint and curious volume of forgotten lore--- While I
-    nodded, nearly napping, suddenly there came a tapping, As of some
-    one gently rapping, rapping at my chamber door. ‘‘\,’Tis some
-    visitor,’’ I muttered, ‘‘tapping at my chamber door--- Only this and
-    nothing more.’’
-    \end{solutionbox}
+  % 			      \item Ordene este conjunto de puntos en orden ascendente.
+
+  % 			      \item Inicializa una variable k en 0 y un contador maxK en 0.
+
+  % 			      \item Recorre los puntos ordenados y, para cada punto, aumenta k 
+  %             si es un extremo izquierdo y disminuye k si es un extremo derecho. 
+  %             Mantén un seguimiento de maxK como el máximo valor alcanzado por k.
+
+  % 			      \item Cuando completes el recorrido de todos los puntos, maxK 
+  %             contendrá la respuesta al problema.
+
+  % 		      \end{enumerate}
+  % 		\item \textbf{Justifique que su propuesta de algoritmo es correcta.}
+
+  % 		      Este algoritmo es correcto porque explora todos los puntos de los 
+  %           intervalos en orden ascendente. Cuando se encuentra un extremo 
+  %           izquierdo, incrementa k, lo que significa que se ha cubierto un 
+  %           nuevo intervalo. Cuando se encuentra un extremo derecho, disminuye k, 
+  %           lo que indica que un intervalo ha terminado de cubrirse. En todo 
+  %           momento, maxK registra el valor máximo de k observado, que es la 
+  %           máxima cantidad de intervalos que cubren un punto.
+
+  % 		\item \textbf{Calcule, con detalle, la complejidad computacional de su propuesta}
+
+  % 		      La complejidad computacional de este algoritmo es dominada por la 
+  %           etapa de ordenamiento de los puntos, que toma O(n log n) tiempo 
+  %           utilizando un algoritmo de ordenamiento eficiente, como QuickSort o 
+  %           MergeSort. El bucle que recorre los puntos toma tiempo lineal O(n), 
+  %           ya que cada punto se procesa una vez. Por lo tanto, la complejidad 
+  %           total es O(n log n).
+
+  % 		\item \textbf{Proporcione un pseudo-código del algoritmo propuesto.}
+  % 		      \begin{minted}[
+  %       frame=lines,
+  %       framesep=2mm,
+  %       baselinestretch=1.2,
+  %       bgcolor=LightGray,
+  %       fontsize=\footnotesize,
+  %       linenos
+  %       ]{Python}
+  %   def max_coverage(intervals):
+  %     points = []
+  %     for interval in intervals:
+  %       points.append((interval[0], 'L'))  # Extremo izquierdo
+  %       points.append((interval[1], 'R'))  # Extremo derecho
+
+  %   points.sort()  # Ordenar los puntos
+
+  %   k = 0
+  %   maxK = 0
+
+  %   for point in points:
+  %       if point[1] == 'L':
+  %           k += 1
+  %       else:
+  %           k -= 1
+  %       maxK = max(maxK, k)
+
+  %   return maxK
+
+  %     \end{minted}
+  % 	\end{enumerate}
+  % \end{solution}
+
+  % \begin{solutionbox}{2in}
+  %   Once upon a midnight dreary, while I pondered, weak and weary, Over
+  %   many a quaint and curious volume of forgotten lore--- While I
+  %   nodded, nearly napping, suddenly there came a tapping, As of some
+  %   one gently rapping, rapping at my chamber door. ‘‘\,’Tis some
+  %   visitor,’’ I muttered, ‘‘tapping at my chamber door--- Only this and
+  %   nothing more.’’
+  %   \end{solutionbox}
 \end{questions}
 \end{document}
 
