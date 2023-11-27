@@ -85,6 +85,10 @@
   \end{enumerate}
   }
 
+  \begin{solution}
+      No se realizo este problema.
+  \end{solution}
+
   \question{Sea a una arista de peso mínimo de una gráfica $G=(V,A)$ con pesos
   en las aristas.
   \begin{enumerate}[a)]
@@ -104,34 +108,34 @@
 
 \begin{enumerate}
   \item \textbf{Inicialización:}
-  Inicializa el árbol generador mínimo con la arista 'a'.
+  Inicializar el árbol generador mínimo con la arista 'a'.
 
   \item \textbf{Selección de la Arista:}
-  En cada paso, selecciona la arista de peso mínimo que conecta un vértice en el 
+  En cada paso, seleccionar la arista de peso mínimo que conecta un vértice en el 
   árbol actual con un vértice fuera del árbol, garantizando que la arista 'a' 
   siempre sea seleccionada si es posible.
 
   \item \textbf{Actualización de Conjuntos:}
-  Actualiza los conjuntos de vértices que forman parte del árbol y los que están 
+  Actualizar los conjuntos de vértices que forman parte del árbol y los que están 
   fuera del árbol.
 
   \item \textbf{Repetición:}
-  Repite el proceso hasta que todos los vértices estén en el árbol generador mínimo.
+  Repetir el proceso hasta que todos los vértices estén en el árbol generador mínimo.
 \end{enumerate}
 
 \textbf{Modificación del Algoritmo de Kruskal:}
 
 \begin{enumerate}
   \item \textbf{Orden de las Aristas:}
-  Antes de comenzar el algoritmo, asegúrate de que la arista 'a' esté incluida 
+  Antes de comenzar el algoritmo, asegurarse de que la arista 'a' esté incluida 
   en la lista de aristas y se ordene primero.
 
   \item \textbf{Unión de Conjuntos:}
-  Durante la ejecución del algoritmo, al unir dos conjuntos de vértices, verifica 
+  Durante la ejecución del algoritmo, al unir dos conjuntos de vértices, verificar 
   que la arista 'a' esté incluida en el árbol generador mínimo.
 
   \item \textbf{Repetición:}
-  Continúa con el proceso hasta que todos los vértices estén en un solo conjunto.
+  Continuar con el proceso hasta que todos los vértices estén en un solo conjunto.
 
 \end{enumerate}
 
@@ -144,30 +148,30 @@ estructuras de datos utilizadas. Aquí hay algunas consideraciones generales:
 
 \begin{itemize}
   \item \textbf{Estructura de Datos para Mantener las Aristas:}
-  Puedes usar una cola de prioridad (heap binario o Fibonacci) para mantener las 
+  Se puede usar una cola de prioridad (heap binario) para mantener las 
   aristas ordenadas por peso.
   
   \item \textbf{Estructura de Datos para Mantener Conjuntos de Vértices:}
-  Puedes usar una estructura de conjunto disjunto (Union-Find) para realizar 
+  Se puede usar una estructura de conjunto disjunto para realizar 
   operaciones de unión y encontrar eficientemente.
 \end{itemize}
 
 \textbf{Algoritmo de Kruskal modificado:}
 
-\textbf{Estructura de Datos para Mantener las Aristas:}
+\begin{itemize}
+    \item \textbf{Estructura de Datos para Mantener las Aristas:}
   Al igual que en Prim, una cola de prioridad es útil para mantener las aristas 
   ordenadas por peso.
 
-\textbf{Estructura de Datos para Mantener Conjuntos de Vértices:}
-  También puedes usar una estructura de conjunto disjunto (Union-Find) para 
+    \item \textbf{Estructura de Datos para Mantener Conjuntos de Vértices:}
+  También se puede usar una estructura de conjunto disjunto para 
   realizar las operaciones de unión y encontrar de manera eficiente.
+\end{itemize}
 
 En términos de complejidad temporal, tanto Prim como Kruskal tendrán una complejidad 
-de $O(E \log V)$, donde $E$ es el número de aristas y $V$ es el número de vértices. 
+de $O(A \log V)$, donde $A$ es el número de aristas y $V$ es el número de vértices. 
 Las operaciones de conjuntos disjuntos son cruciales para lograr eficiencia en ambos algoritmos.
 
-Es importante señalar que la complejidad exacta dependerá de la implementación 
-específica y de la elección de las estructuras de datos.
   \end{solution}
   
   \question{
@@ -188,7 +192,31 @@ las aristas, con $|V|=n$, $|A|=m$ y $\delta:A\to R+$.
 \end{enumerate}}
 
 \begin{solution}
-  Aqui esta la solucion del problema 3.
+  \textbf{Parte a) Diseño del algoritmo}
+
+Para diseñar un algoritmo que determine el bosque generador de peso mínimo para $(D)$, nos basaremos en la idea de agregar aristas al bosque generador de peso mínimo en orden creciente de peso, evitando la formación de ciclos.
+
+\textbf{Algoritmo para la Gráfica (D)}:
+    \begin{enumerate}[1.]
+        \item Inicializar un conjunto vacío F como el bosque generador de peso mínimo.
+        \item Ordenar las aristas de D en orden no decreciente de peso.
+        \item Para cada arista $(u, v)$ en el conjunto de aristas ordenadas:
+        \begin{enumerate}[a.]
+            \item Si agregar la arista $(u, v)$ a F no forma un ciclo, agregarla a F.
+            \item Si el número de aristas en F es igual a $n-1$, detenerse (donde n es el número de vértices).
+        \end{enumerate}
+        \item Devolver F como el bosque generador de peso mínimo.
+    \end{enumerate}
+
+Este algoritmo utiliza la estructura de datos de conjuntos disjuntos para verificar la existencia de ciclos de manera eficiente.
+
+\textbf{Parte b) Estructuras de Datos y Justificación}
+
+\begin{enumerate}[1.]
+    \item \textbf{Conjuntos disjuntos (Disjoint-Set):} Utilizaremos esta estructura de datos para realizar las verificaciones de ciclos de manera eficiente. La operación de unión y encontrar en conjuntos disjuntos tiene una complejidad amortizada de $(O(\log n))$, lo que contribuye a la complejidad total del algoritmo.
+
+    \item \textbf{Lista de aristas ordenadas:} Necesitaremos ordenar las aristas en orden no decreciente de peso. Utilizaremos un algoritmo de ordenamiento eficiente, como MergeSort o QuickSort, que tiene una complejidad de $(O(m \log m))$.
+\end{enumerate}
 \end{solution}
 
   \question{\textbf{Opcional.} Sea $G=(V,A)$ una gráfica conexa con pesos positivos
@@ -206,13 +234,9 @@ las aristas, con $|V|=n$, $|A|=m$ y $\delta:A\to R+$.
     \textbf{a)Diseñar un algoritmo que determine el árbol generador de peso
     máximo, usando tal regla.}
 
-    Para resolver este problema, puedes utilizar el algoritmo de Kruskal modificado 
-    para maximizar el peso del árbol generador. Aquí te doy una descripción del 
-    algoritmo y luego abordo la cuestión del desempeño computacional y las 
-    estructuras de datos utilizadas.
+    Para resolver este problema, tenemos que maximizar el peso del árbol generador. Este seria el algoritmo para encontrar el árbol generador de peso máximo:
 
-    Algoritmo para encontrar el árbol generador de peso máximo:
-    
+    \textbf{Algoritmo para la gráfica G:}
     \begin{enumerate}[1.]
       \item \textbf{Ordenar las aristas:} Ordena todas las aristas en orden no decreciente de peso.
       \item \textbf{Inicializar el árbol generador:} Inicializa un árbol generador vacío.
@@ -221,35 +245,24 @@ las aristas, con $|V|=n$, $|A|=m$ y $\delta:A\to R+$.
       ya seleccionadas.
     \end{enumerate}
 
-    Este enfoque modificado del algoritmo de Kruskal seleccionará aristas de mayor 
-    peso en lugar de menor peso, asegurando así que el árbol generador 
-    resultante tenga el peso máximo.
+    Este enfoque modificado es basado en el algoritmo de Kruskal que selecciona aristas de mayor peso en lugar de menor peso, asegurando así que el árbol generador resultante tenga el peso máximo.
 
     \textbf{b) Calcular el desempeño computacional del algoritmo propuesto, indicando 
     las estructuras de datos usadas para lograr tal desempeño.}
 
-    \textbf{Ordenar las aristas:} Este paso requiere tiempo $(O(E \log E))$, 
-    donde $(E)$ es el número de aristas.
+    \begin{itemize}
+        \item \textbf{Ordenar las aristas:} Este paso requiere tiempo $(O(A \log A))$, donde $(A)$ es el número de aristas.
   
-    \textbf{Estructuras de datos:} Para mantener el seguimiento de los conjuntos 
-    disjuntos y verificar si agregar una arista forma un ciclo, puedes utilizar 
-    una estructura de datos eficiente como una estructura de conjuntos disjuntos 
-    (Disjoint Set Union, DSU). La operación de unión en DSU puede realizarse en 
-    $(O(\alpha(V)))$ en promedio, donde $(\alpha(V))$ es la inversa de la función 
-    de Ackermann, y $(V)$ es el número de vértices.
+        \item \textbf{Estructuras de datos:} Para mantener el seguimiento de los conjuntos disjuntos y verificar si agregar una arista forma un ciclo, se puede utilizar una estructura de datos eficiente como una estructura de conjuntos disjuntos.
 
-    \textbf{Recorrer las aristas ordenadas:} Este paso tiene un tiempo de ejecución 
-    de $(O(E))$, ya que se recorren todas las aristas una vez.
+        \item \textbf{Recorrer las aristas ordenadas:} Este paso tiene un tiempo de ejecución de $(O(A))$, ya que se recorren todas las aristas una vez.
 
-    Por lo tanto, el tiempo total de ejecución es dominado por el costo de ordenar 
-    las aristas, lo que resulta en $(O(E \log E))$ en el peor de los casos.
+        Por lo tanto, el tiempo total de ejecución es dominado por el costo de ordenar las aristas, lo que resulta en $(O(A \log A))$ en el peor de los casos.
 
-    El espacio adicional requerido para mantener la estructura de conjuntos disjuntos 
-    y otras variables auxiliares es $(O(V + E))$.
+        El espacio adicional requerido para mantener la estructura de conjuntos disjuntos y otras variables auxiliares es $(O(V + A))$.
 
-    En resumen, el desempeño computacional del algoritmo propuesto es 
-    $(O(E \log E))$, y las estructuras de datos utilizadas son principalmente 
-    la estructura de conjuntos disjuntos y un arreglo para mantener las aristas ordenadas.
+        En resumen, el desempeño computacional del algoritmo propuesto es $(O(A \log A))$, y las estructuras de datos utilizadas son principalmente la estructura de conjuntos disjuntos y un arreglo para mantener las aristas ordenadas.
+    \end{itemize}
   \end{solution}
   
 \end{questions}
